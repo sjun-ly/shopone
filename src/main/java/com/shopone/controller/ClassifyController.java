@@ -3,6 +3,7 @@ package com.shopone.controller;
 
 import com.shopone.entity.Classify;
 import com.shopone.mapper.ClassifyMapper;
+import com.shopone.service.ClassifyService;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +27,7 @@ import java.util.List;
 public class ClassifyController {
 
     @Autowired
-    ClassifyMapper classifyMapper;
+    ClassifyService classifyService;
 
     @RequestMapping("/get")
     public String getClassifyList(Model model) {
@@ -34,12 +35,11 @@ public class ClassifyController {
 //        List<Classify> classifies = classifyMapper.selectList(null);
 //        System.out.println(classifies);
 //        model.addAttribute("classifies",classifies);
-        List<Classify> classifyList = classifyMapper.getClassifyList();
+        List<Classify> classifyList =classifyService.getClassifyList();
         System.out.println(classifyList);
 
         return "index";
     }
-
 
 }
 

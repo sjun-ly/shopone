@@ -2,4 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.shopone.mapper.GdDetailMapper">
 
+    <resultMap id="GdDetailMap" type="com.shopone.entity.GdDetail">
+        <id column="gd_detail_id" property="gdDetailId"></id>
+        <result column="gd_detail_name" property="gdDetailName"></result>
+        <result column="gd_detail_price" property="gdDetailPrice"></result>
+        <result column="gd_detail_refprice" property="gdDetailRefprice"></result>
+        <result column="gd_detail_info" property="gdDetailInfo"></result>
+        <result column="gd_detail_img" property="gdDetailImg"></result>
+        <result column="gd_detail_logo" property="gdDetailLogo"></result>
+        <result column="gd_detail_imgdetail" property="gdDetailImgdetail"></result>
+        <collection property="findGdAttributeList" ofType="com.shopone.entity.GdAttribute">
+            <id column="gd_attribute_id" property="gdAttributeId"></id>
+            <result column="gd_attribute_type" property="gdAttributeType"></result>
+        </collection>
+        <collection property="findGdAttrDetailList" ofType="com.shopone.entity.GdAttrdetail">
+            <id column="gd_attrdetail_id" property="gdAttrdetailId"></id>
+            <result column="gd_attrdetail_info" property="gdAttrdetailInfo"></result>
+            <result column="gd_attribute_id" property="gdAttributeId"></result>
+        </collection>
+    </resultMap>
+
+    <select id="infoGdDeatilByID" resultMap="GdDetailMap" parameterType="int">
+    SELECT DISTINCT gd.gd_detail_name,gd.gd_detail_price,
+    gd_detail_refprice,gd_detail_info,gd.gd_detail_img,
+    gd.gd_detail_logo,gd_detail_imgdetail,
+    gda.gd_attrdetail_info,gdat.gd_attribute_type
+    FROM gd_detail gd JOIN gd_da ga
+    on gd.gd_detail_id = ga.gd_detail_id
+    JOIN gd_attrdetail gda
+    on ga.gd_attrdetail_id = gda.gd_attrdetail_id
+    JOIN gd_attribute gdat
+    on gda.gd_attribute_id = gdat.gd_attribute_id
+    WHERE gd.gd_detail_id = #{id}
+    </select>
+
+
 </mapper>
