@@ -28,7 +28,7 @@ public class GdDetailController {
     public  Object findGdDetail(){
         System.out.println(gdDetailMapper);
         System.out.println(1);
-        return  gdDetailMapper.infoGdDeatilByID(1);
+        return  gdDetailMapper  .infoGdDeatilByID(1);
 
     }
 }
