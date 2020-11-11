@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopone.mapper.AttributeDetailMapper">
+
+    <select id="attriButeByid" parameterType="com.shopone.entity.Classify" resultType="com.shopone.entity.AttributeDetail">
+        SELECT distinct attributedetail_info,attribute_id FROM classdetail JOIN attr_class USING(classdetail_id)
+        LEFT JOIN attribute_detail on attributedetail.attributedetail_id
+        WHERE classdetail_id  in (SELECT classdetail_id FROM classdetail WHERE classify_id = 5)
+
+    </select>
+
+    <select id="AllSerice" resultType="com.shopone.entity.AttributeDetail">
+        SELECT * FROM attribute_detail
+    </select>
+
+</mapper>
